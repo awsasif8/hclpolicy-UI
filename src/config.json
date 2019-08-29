@@ -1,0 +1,9 @@
+{
+    "jsonServerUrl" : "http://10.117.189.233:9900/",
+    "url": "http://192.168.43.179:8087/bankproducts/api",
+    "urlCharan": "http://10.117.189.211:8087/bankproducts/api",
+    "urlMahesh":"http://10.117.189.252:8087/bankproducts/api",
+    "urlPradeep":"http://10.117.189.73:8181/bankproducts/api",
+    "urlDhana": "http://10.117.189.175:8087/bankproducts/api",
+    "urlSharath": "http://10.117.189.29:8087/bankproducts/api"
+}
