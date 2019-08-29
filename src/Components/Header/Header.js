@@ -17,7 +17,7 @@ class Header extends Component {
             <div>
                 <div style={{ backgroundColor: 'rgb(0, 123, 255)', color: '#fff' }}>
                     <img src={Logo} alt='not found' width="200px" height="100px"/>
-                        <span className='' style={{ color: '#fff', fontSize: '30px', margin: '15%',fontStyle: 'italic' }}>  HCL Policies-Protect your future</span>
+                        <span className='' style={{ color: '#fff', fontSize: '30px', margin: '15%',fontStyle: 'italic' }}>  {t('title')}</span>
                     {/* {
                         this.props.isLoggedIn ?
                             <span ><button className="bt" onClick={() => this.props.redirect('/logout', this.props.history)} data-toggle="tooltip" title="Logout" >Logout</button></span> :

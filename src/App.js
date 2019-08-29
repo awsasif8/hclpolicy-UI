@@ -4,6 +4,8 @@ import {withTranslation} from 'react-i18next';
 import { withRouter, HashRouter, Switch, Route } from 'react-router-dom'
 import Home from './Components/Home/Home';
 import Header from './Components/Header/Header';
+import PolicyList from './Components/PolicyList/Policylist';
+import BuyPolicy from './Components/BuyPolicy/BuyPolicy';
 
 class App extends Component {
   constructor(props) {
@@ -23,6 +25,8 @@ class App extends Component {
          <Header redirect={this.redirect}/>
           <Switch> 
              <Route path='/' exact component={Home} /> 
+             <Route path='/policyList' exact component={PolicyList} /> 
+             <Route path='/buypolicy' exact component={BuyPolicy} /> 
           </Switch>    
         </HashRouter>
       </div>

@@ -1,0 +1,16 @@
+.policyAccordion{
+    width: 60%;
+    margin-left: 20%;
+    margin-top: 1%;
+    text-align: left;
+}
+.price{
+    font-weight: bold;
+    color: blue;
+}
+.prodheading{
+    font-weight: bold;
+}
+.analysisbut{
+    float: right
+}
