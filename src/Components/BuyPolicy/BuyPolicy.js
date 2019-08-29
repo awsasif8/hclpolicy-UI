@@ -67,7 +67,10 @@ export class BuyPolicy extends Component {
                     }
                 }).catch((err) => {
                     alert("Error while buying policy.. Please try again later")
-                    console.log("Inside error")
+                    
+                    this.props.history.push({
+                        pathname: '/policyList',
+                    })
                     // const getAlert = () => (
                     //     <SweetAlert
                     //         title="Error in buying the policy !"

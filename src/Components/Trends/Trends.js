@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import config from '../../config.json'
 import axios from 'axios'
-import { LineChart ,Line ,BarChart, Bar, XAxis, YAxis, Cell, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { PieChart, Pie,LineChart ,Line ,BarChart, Bar, XAxis, YAxis, Cell, CartesianGrid, Tooltip, Legend } from 'recharts';
 import './Trends.css'
 export class Trends extends Component {
     constructor(props) {
@@ -15,7 +15,7 @@ export class Trends extends Component {
 
     componentDidMount() {
         console.log(this.state)
-        axios.get(`${config.urlPradeep}/trends`)
+        axios.get(`${config.url}/trends`)
             .then(res => {
                 console.log("res inside component did mount get all day data", res)
                 this.setState({
@@ -24,9 +24,9 @@ export class Trends extends Component {
                     console.log("overall list after set state", this.state.overallList)
                 });
             })
-            axios.get(`${config.urlPradeep}/trends`)
+            axios.get(`${config.url}/latesttrends/latest`)
             .then(res => {
-                console.log("res inside component did mount get latest data", res)
+                console.log("", res)
                 this.setState({
                     latestList: res.data
                 }, () => {
@@ -38,7 +38,9 @@ export class Trends extends Component {
         return (
             <div className="chart">
                 <br></br>
-                    <h3>Overall Trends</h3>
+                    <h3>Overall Trends
+                    <button type="button" style={{ marginLeft: "30%" }} className="btn btn-primary" onClick={() => { this.props.history.push('/') }}>Back</button>&nbsp;
+                    </h3>
                     <br></br>
 
                     <BarChart width={1000} height={300} data={this.state.overallList}
@@ -55,11 +57,11 @@ export class Trends extends Component {
                     </BarChart>
                     <h3>Latest Trends</h3>
                     <br></br>
-                    <LineChart width={1000} height={300} data={this.state.overallList}>
+                    <LineChart width={1100} height={300} data={this.state.latestList}>
                         <XAxis dataKey="policyName"  />
                         <YAxis />
                         <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-                        <Line type="monotone" dataKey="count" stroke="#8884d8" />
+                        <Line type="monotone" dataKey="percentage" stroke="#8884d8" />
                        
                     </LineChart>
 

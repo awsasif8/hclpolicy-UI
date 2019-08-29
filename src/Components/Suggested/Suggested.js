@@ -4,39 +4,39 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import axios from 'axios'
 import config from '../../config.json'
-import './PolicyList.css'
-export class PolicyList extends Component {
+import './Suggested.css'
+export class Suggested extends Component {
     constructor(props) {
         super(props);
         this.state = {
             policyList: [],
-            // policyList: [{
-            //     policyId: 1,
-            //     policyName: "LIC Jeevan Akshay VI",
-            //     policyPrice: 100000
-            // }, {
-            //     policyId: 2,
-            //     policyName: "LIC e-Term Plan",
-            //     policyPrice: 300000
+                // policyList: [{
+                //     policyId: 1,
+                //     policyName: "LIC Jeevan Akshay VI",
+                //     policyPrice: 100000
+                // }, {
+                //     policyId: 2,
+                //     policyName: "LIC e-Term Plan",
+                //     policyPrice: 300000
 
-            // }
-            // ],
-            // policyListDetailed: [{
-            //     policyId: 1,
-            //     policyFeatures: "Differential premium rates for Smoker/Non-Smoker lives.Application of own life ONLY will be considered.Minimum Basic Sum Assured should be Rs. 25, 00,000 for Aggregate category and for Non-smoker category it should be Rs. 50, 00,000. There is no upper limit for Maximum Basic Sum Assured.Covers broad range of age group – Form 18 years to 60 years",
-            //     terms:{
-            //         sumAssured: "2500000",
-            //         modeOfPremium: "Yearly"
-            //     }
-            // }, {
-            //     policyId: 2,
-            //     policyFeatures: "Differential premium rates for Smoker/Non-Smoker lives.Application of own life ONLY will be considered.Minimum Basic Sum Assured should be Rs. 25, 00,000 for Aggregate category and for Non-smoker category it should be Rs. 50, 00,000. There is no upper limit for Maximum Basic Sum Assured.Covers broad range of age group – Form 18 years to 60 years",
-            //     terms:{
-            //         sumAssured: "2500000",
-            //         modeOfPremium: "Yearly"
-            //     }
-            // }
-            // ],
+                // }
+                // ],
+                // policyListDetailed: [{
+                //     policyId: 1,
+                //     policyFeatures: "Differential premium rates for Smoker/Non-Smoker lives.Application of own life ONLY will be considered.Minimum Basic Sum Assured should be Rs. 25, 00,000 for Aggregate category and for Non-smoker category it should be Rs. 50, 00,000. There is no upper limit for Maximum Basic Sum Assured.Covers broad range of age group – Form 18 years to 60 years",
+                //     terms:{
+                //         sumAssured: "2500000",
+                //         modeOfPremium: "Yearly"
+                //     }
+                // }, {
+                //     policyId: 2,
+                //     policyFeatures: "Differential premium rates for Smoker/Non-Smoker lives.Application of own life ONLY will be considered.Minimum Basic Sum Assured should be Rs. 25, 00,000 for Aggregate category and for Non-smoker category it should be Rs. 50, 00,000. There is no upper limit for Maximum Basic Sum Assured.Covers broad range of age group – Form 18 years to 60 years",
+                //     terms:{
+                //         sumAssured: "2500000",
+                //         modeOfPremium: "Yearly"
+                //     }
+                // }
+                // ],
             policyListDetailed: [],
             policyId: '',
             policyName: '',
@@ -56,19 +56,15 @@ export class PolicyList extends Component {
 
     }
     componentDidMount() {
-        axios.get(`${config.url}/policies`)
+        axios.get(`${config.url}/latesttrends/suggest`)
             .then(res => {
-                console.log("res inside on clicked accordion", res)
-                if (res.status === 200 && res.data.status === "SUCCESS") {
+                console.log("res inside comp did mount", res)
                     console.log("inside success")
                     this.setState({
-                        policyList: res.data.data
+                        policyList: res.data
                     }, () => {
 
                     });
-                } else {
-
-                }
             }).catch(err => {
 
             })
@@ -159,9 +155,8 @@ export class PolicyList extends Component {
             <div >
                 <br></br><br></br>
                 <h3>
-                    Avaliable Policies
-                    <button type="button" style={{ marginLeft: "20%" }} className="btn btn-primary" onClick={() => { this.props.history.push('/suggestedList') }}>Suggested Policies</button>&nbsp;
-                    <button type="button" style={{ marginLeft: "1%" }} className="btn btn-primary" onClick={() => { this.props.history.push('/') }}>Back</button>&nbsp;
+                    Suggested Policies
+                    <button type="button" style={{ marginLeft: "30%" }} className="btn btn-primary" onClick={() => { this.props.history.push('/') }}>Back</button>&nbsp;
                 </h3>
                 <div className="policyAccordion">
                     <Accordion >
@@ -175,4 +170,4 @@ export class PolicyList extends Component {
     }
 }
 
-export default PolicyList
+export default Suggested
