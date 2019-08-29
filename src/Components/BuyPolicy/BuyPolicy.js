@@ -54,24 +54,20 @@ export class BuyPolicy extends Component {
                     email: email,
                     sapId: sapId
                 };
-                this.props.history.push({
-                                pathname: '/policyList',
-                            })
-                console.log("policy details for buy", policy)
-                alert('Your policy request has been submitted successfully.')
-                // this.getData(policy).then((response) => {
-                //     if (response.status === 200 && response.data.status === "SUCCESS") {
-                //         console.log(response.data)
-                //         alert(response.data.message)
+               
+                this.getData(policy).then((response) => {
+                    if (response.status === 200 && response.data.status === "SUCCESS") {
+                        console.log(response.data)
+                        alert(response.data.message)
 
-                //         this.props.history.push({
-                //             pathname: '/policyList',
-                //         })
-                //     } else {
-                //     }
-                // }).catch((err) => {
-                //     alert("Error while buying policy.. Please try again later")
-                    // console.log("Inside error")
+                        this.props.history.push({
+                            pathname: '/policyList',
+                        })
+                    } else {
+                    }
+                }).catch((err) => {
+                    alert("Error while buying policy.. Please try again later")
+                    console.log("Inside error")
                     // const getAlert = () => (
                     //     <SweetAlert
                     //         title="Error in buying the policy !"
@@ -92,7 +88,7 @@ export class BuyPolicy extends Component {
                     //     this.props.history.push('/policyList')
                     // }
 
-                // })
+                })
             }
         });
     }

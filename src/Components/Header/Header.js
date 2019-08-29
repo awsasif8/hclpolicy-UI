@@ -16,8 +16,8 @@ class Header extends Component {
         return (
             <div>
                 <div style={{ backgroundColor: 'rgb(0, 123, 255)', color: '#fff' }}>
-                    <img src={Logo} alt='not found' width="200px" height="100px"/>
-                        <span className='' style={{ color: '#fff', fontSize: '30px', margin: '15%',fontStyle: 'italic' }}>  {t('title')}</span>
+                    <img src={Logo} alt='not found' width="200px" height="100px"></img>
+                        <span className='' style={{ color: '#fff', fontSize: '30px', margin: '15%',fontStyle: 'italic' }}>  {t('title   ')}</span>
                     {/* {
                         this.props.isLoggedIn ?
                             <span ><button className="bt" onClick={() => this.props.redirect('/logout', this.props.history)} data-toggle="tooltip" title="Logout" >Logout</button></span> :

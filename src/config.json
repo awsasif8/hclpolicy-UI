@@ -3,7 +3,7 @@
     "url": "http://52.66.198.162:8087/ingbank/api",
     "urlCharan": "http://10.117.189.221:8087/ingbank/api",
     "urlMahesh":"http://10.117.189.252:8087/ingbank/api",
-    "urlPradeep":"http://10.117.189.73:8181/ingbank/api",
+    "urlPradeep":"http://10.117.189.73:8087/ingbank/api",
     "urlDhana": "http://10.117.189.175:8087/ingbank/api",
     "urlSharath": "http://10.117.189.29:8087/ingbank/api"
 }

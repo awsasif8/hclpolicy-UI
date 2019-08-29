@@ -6,6 +6,7 @@ import Home from './Components/Home/Home';
 import Header from './Components/Header/Header';
 import PolicyList from './Components/PolicyList/Policylist';
 import BuyPolicy from './Components/BuyPolicy/BuyPolicy';
+import Trends from './Components/Trends/Trends';
 
 class App extends Component {
   constructor(props) {
@@ -27,6 +28,7 @@ class App extends Component {
              <Route path='/' exact component={Home} /> 
              <Route path='/policyList' exact component={PolicyList} /> 
              <Route path='/buypolicy' exact component={BuyPolicy} /> 
+             <Route path='/trends' exact component={Trends} /> 
           </Switch>    
         </HashRouter>
       </div>
