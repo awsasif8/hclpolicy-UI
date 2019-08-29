@@ -107,7 +107,7 @@ export class BuyPolicy extends Component {
         //     }
         // }
         return new Promise((resolve, reject) => {
-            axios.post(`${config.urlCharan}/buy`, policy)
+            axios.post(`${config.url}/buy`, policy)
                 .then(res => {
                     resolve(res)
                 }).catch(err => {
