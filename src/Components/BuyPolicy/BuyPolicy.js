@@ -17,17 +17,23 @@ export class BuyPolicy extends Component {
             nameError: '',
             sapId: '',
             sapIdError: '',
-            alert: null
+            alert: null,
+            policyFor: '',
+            policyForError:'',
+            relationship: '',
+            relationshipError:'',
+            dependentRelation: '',
+
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleBuy = this.handleBuy.bind(this);
     }
     componentDidMount() {
-           let policyId=this.props.location.state.policyId? this.props.location.state.policyId: ''
-            this.setState({
-                policyId: policyId
-            })
-            console.log("policy id after set state", policyId)
+        let policyId = this.props.location.state.policyId ? this.props.location.state.policyId : ''
+        this.setState({
+            policyId: policyId
+        })
+        console.log("policy id after set state", policyId)
     }
     handleChange(e) {
         this.setState({ [e.target.id]: e.target.value }, () => {
@@ -35,7 +41,7 @@ export class BuyPolicy extends Component {
         });
 
     }
-    
+
     handleBuy(e) {
         e.preventDefault()
         this.validate().then((res) => {
@@ -48,45 +54,50 @@ export class BuyPolicy extends Component {
                     email: email,
                     sapId: sapId
                 };
+                this.props.history.push({
+                                pathname: '/policyList',
+                            })
                 console.log("policy details for buy", policy)
-                this.getData(policy).then((response) => {
-                    if (response.status === 200 && response.data.status === "SUCCESS") {
-                        console.log(response.data)
-                        alert(response.data.message)
+                alert('Your policy request has been submitted successfully.')
+                // this.getData(policy).then((response) => {
+                //     if (response.status === 200 && response.data.status === "SUCCESS") {
+                //         console.log(response.data)
+                //         alert(response.data.message)
 
-                        this.props.history.push({
-                            pathname: '/policyList',
-                        })
-                    } else {
-                    }
-                }).catch((err) => {
-                    console.log("Inside error")
-                    const getAlert = () => (
-                        <SweetAlert
-                            title="Error in buying the policy !"
-                            confirmBtnBsStyle="success"
-                            onConfirm={() => hideAlert()}
-                        >
-                        </SweetAlert>
-                    );
-                    this.setState({
-                        alert: getAlert()
-                    });
+                //         this.props.history.push({
+                //             pathname: '/policyList',
+                //         })
+                //     } else {
+                //     }
+                // }).catch((err) => {
+                //     alert("Error while buying policy.. Please try again later")
+                    // console.log("Inside error")
+                    // const getAlert = () => (
+                    //     <SweetAlert
+                    //         title="Error in buying the policy !"
+                    //         confirmBtnBsStyle="success"
+                    //         onConfirm={() => hideAlert()}
+                    //     >
+                    //     </SweetAlert>
+                    // );
+                    // this.setState({
+                    //     alert: getAlert()
+                    // });
 
-                    const hideAlert = () => {
-                        console.log('Hiding alert...');
-                        this.setState({
-                            alert: null
-                        });
-                        this.props.history.push('/policyList')
-                    }
+                    // const hideAlert = () => {
+                    //     console.log('Hiding alert...');
+                    //     this.setState({
+                    //         alert: null
+                    //     });
+                    //     this.props.history.push('/policyList')
+                    // }
 
-                })
+                // })
             }
         });
     }
 
-   
+
     getData(policy) {
         // let res={
         //     status: 200,
@@ -113,9 +124,7 @@ export class BuyPolicy extends Component {
                 ageError: '',
                 nameError: '',
                 emailError: '',
-                addressError: '',
-                policyIdError: '',
-                panError: ''
+                sapIdError: ''
             }
 
             if (this.state.email.indexOf('@') !== -1 || this.state.email !== '') {
@@ -123,7 +132,7 @@ export class BuyPolicy extends Component {
                 isValid = false;
                 errors.nameError = 'Email Id is mandatory and should be in proper format'
             }
-            if (this.state.email === '' || this.state.name === '' || this.state.sapId  === '') {
+            if (this.state.email === '' && this.state.name === '' && this.state.sapId === '') {
                 isValid = false;
                 errors.nameError = 'Name, emailId and SAP ID are mandatory fields'
             }
@@ -148,9 +157,11 @@ export class BuyPolicy extends Component {
     render() {
         return (
             <div className="container">
-                 
+
                 <form>
                     <span className="pull-right text-danger " ><small>{this.state.nameError}</small></span>
+                    <span className="pull-right text-danger " ><small>{this.state.emailError}</small></span>
+                    <span className="pull-right text-danger " ><small>{this.state.sapIdError}</small></span>
                     <div className="form-group row">
                         <br></br>
                         <label htmlFor="name" className="col-sm-2 col-form-label labelal " >Name</label>
@@ -162,7 +173,7 @@ export class BuyPolicy extends Component {
                         <br></br>
                         <label htmlFor="sapid" className="col-sm-2 col-form-label labelal " >SAP Id</label>
                         <div className="col-sm-4  ">
-                            <input type="text" onChange={this.handleChange} className="form-control" id="sapId" placeholder="Enter SAP Id" />
+                            <input type="text" onChange={this.handleChange}className="form-control" id="sapId" placeholder="Enter SAP Id" />
                         </div>
                     </div>
                     <div className="form-group row">
@@ -170,6 +181,28 @@ export class BuyPolicy extends Component {
                         <label htmlFor="email" className="col-sm-2 col-form-label labelal">Email</label>
                         <div className="col-sm-4 " >
                             <input type="email" onChange={this.handleChange} className="form-control" id="email" placeholder="Enter email" />
+                        </div>
+                    </div>
+                    <div className="form-group row">
+                        <br></br>
+                        <label htmlFor="policyFor" className="col-sm-2 col-form-label labelal">Policy For</label>
+                        <div className="col-sm-4 " >
+                            <select id="policyFor" className="form-control" onChange={this.onChange}>
+                                <option value="self">Self</option>
+                                <option value="others">Others</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div className="form-group row">
+                        <br></br>
+                        <label htmlFor="dependentRelation" className="col-sm-2 col-form-label labelal">Relationship with dependent</label>
+                        <div className="col-sm-4 " >
+                            <select id="dependentRelation" className="form-control" onChange={this.onChange}>
+                                <option value="father">Father</option>
+                                <option value="mother">Mother</option>
+                                <option value="daughter">Daughter</option>
+                                <option value="son">Son</option>
+                            </select>
                         </div>
                     </div>
 
