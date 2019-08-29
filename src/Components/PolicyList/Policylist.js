@@ -56,7 +56,7 @@ export class PolicyList extends Component {
 
     }
     componentDidMount() {
-        axios.get(`${config.urlSharath}/policies`)
+        axios.get(`${config.url}/policies`)
             .then(res => {
                 console.log("res inside on clicked accordion", res)
                 if (res.status === 200 && res.data.status === "SUCCESS") {
@@ -85,7 +85,7 @@ export class PolicyList extends Component {
         // this.setState({
         //     policyList: this.state.policyListDetailed
         // })
-        axios.get(`${config.urlSharath}/policies/${item.policyId}`)
+        axios.get(`${config.url}/policies/${item.policyId}`)
             .then(res => {
                 console.log("res inside on clicked accordion", res)
 
