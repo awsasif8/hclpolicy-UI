@@ -9,7 +9,7 @@ export class PolicyList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-             policyList: [],
+            policyList: [],
             // policyList: [{
             //     policyId: 1,
             //     policyName: "LIC Jeevan Akshay VI",
@@ -37,7 +37,7 @@ export class PolicyList extends Component {
             //     }
             // }
             // ],
-            policyListDetailed:[],
+            policyListDetailed: [],
             policyId: '',
             policyName: '',
             proceedbuy: false
@@ -50,7 +50,7 @@ export class PolicyList extends Component {
         // this.onChange = this.onChange.bind(this)
         // this.fileUpload = this.fileUpload.bind(this)
     }
-    handleClickAnalysis(e){
+    handleClickAnalysis(e) {
         e.preventDefault();
         this.props.history.push('/analysis')
 
@@ -88,34 +88,51 @@ export class PolicyList extends Component {
         axios.get(`${config.urlSharath}/policies/${item.policyId}`)
             .then(res => {
                 console.log("res inside on clicked accordion", res)
-               
-                    console.log("inside success", res.data)
-                    this.setState({
-                        policyListDetailed: res.data
-                    });
-                    console.log("After set state")
-    
+
+                console.log("inside success", res.data)
+                this.setState({
+                    policyListDetailed: res.data
+                });
+                console.log("After set state")
+
             }).catch(err => {
 
             })
 
     }
     render() {
-        let policyListD= []
+        let policyListD = []
         console.log("new list", this.state.policyListDetailed)
         policyListD.push(this.state.policyListDetailed)
         console.log("policylistd", policyListD)
+
         let policyDetailedList = policyListD.map((item, i) => {
-            console.log("item", item)
+            console.log("darsana",item)
+
+            // let termsList = item['terms'].map((each, i) => {
+            //     return (
+            //         <div>
+
+            //             <p>Tax Benefit: {each.taxBenefit}</p>
+            //             <p>Entry Limit: {each.entryLimit}</p>
+            //         </div>
+
+            //     )
+            // }, this);
+
+            // console.log("item", item)
             return (
                 <div>
 
-                    <p style={{ fontWeight: "bold"}}>Sum Assured {item.sumAssured}</p>
-                    <p style={{ fontWeight: "bold"}}>Benefits</p>
+                    <p style={{ fontWeight: "bold" , color: "blue"}}>Sum Assured {item.sumAssured}</p>
+                    <p style={{ fontWeight: "bold" , color: "blue"}}>Benefits</p>
                     <p >{item.benefits}</p>
-                    <p style={{ fontWeight: "bold"}}>Features</p>
+                    <p style={{ fontWeight: "bold" , color: "blue"}}>Features</p>
                     <p>{item.features}</p>
-                    <p style={{ fontWeight: "bold"}}>policy Price: {item.policyPrice} &nbsp;&nbsp; <Button onClick={(e)=>this.handleBuy(e,item)}>Opt</Button> </p>
+                    <p style={{ fontWeight: "bold" , color: "blue"}}>policy Price: {item.policyPrice} &nbsp;&nbsp; <Button onClick={(e) => this.handleBuy(e, item)}>Opt</Button> </p>
+                    <p style={{ fontWeight: "bold", color: "red" }}>Terms & Conditions</p>
+                    <p > Tax Benefit : {item.taxBenefit}</p>
+                    <p > Entry Limit : {item.entryLimit}</p>
                 </div>
             )
         }, this);
@@ -124,25 +141,26 @@ export class PolicyList extends Component {
             return (
                 <Card>
                     <Accordion.Toggle className="prodheading" onClick={(e) => { this.onClickAccordion(e, item) }} as={Card.Header} eventKey={item.policyId}>
-                        {item.policyName} &nbsp;&nbsp; Price: {item.policyPrice}&nbsp;&nbsp; Sum Assured: {item.sumAssured}
+                        <p style={{fontSize: "1em", color: "grey"}}>{item.policyName} &nbsp;&nbsp; Price: {item.policyPrice}&nbsp;&nbsp; Sum Assured: {item.sumAssured}</p>
                     </Accordion.Toggle>
                     <Accordion.Collapse eventKey={item.policyId}>
-                    <Card.Body>
-                        {policyDetailedList}
-                    </Card.Body>
+                        <Card.Body>
+                            {policyDetailedList}
+
+                        </Card.Body>
                     </Accordion.Collapse>
                     {/* <Button onClick={this.handleBuy}>Buy</Button> */}
                 </Card>
                 // <option key={i} value={item.policy}>{item.stockName}</option>
             )
         }, this);
-       
+
         return (
             <div >
-                 <br></br><br></br>
+                <br></br><br></br>
                 <h3>
                     Avaliable Policies
-                    <button type="button" style={{marginLeft: "30%"}} className="btn btn-primary" onClick={()=>{this.props.history.push('/suggestedList')}}>Suggested Policies</button>&nbsp;
+                    <button type="button" style={{ marginLeft: "30%" }} className="btn btn-primary" onClick={() => { this.props.history.push('/suggestedList') }}>Suggested Policies</button>&nbsp;
                 </h3>
                 <div className="policyAccordion">
                     <Accordion >

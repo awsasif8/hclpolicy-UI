@@ -16,6 +16,9 @@ i18n
         interpolation: {
             escapeValue: false // not needed for react!!
         },
+        backend:{
+            loadPath: `./locales/{{lng}}/{{ns}}.json`
+        },
         react: {
             wait: true,
             useSuspense: false
